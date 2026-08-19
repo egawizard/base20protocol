@@ -133,6 +133,8 @@
   }
   .btn-primary{background:var(--blue); color:#fff; border:1px solid var(--blue);}
   .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(47,107,255,0.35);}
+  .btn-outline{border:1px solid var(--blue-dim); color:var(--blue-bright); background:rgba(47,107,255,0.06);}
+  .btn-outline:hover{border-color:var(--blue); background:var(--blue-dim); transform:translateY(-2px);}
   .btn-ghost{border:1px solid var(--border); color:var(--ink-dim); cursor:not-allowed;}
   .btn-ghost .lock{opacity:0.6;}
 
@@ -177,6 +179,32 @@
     display:flex; justify-content:space-between;
   }
   .panel-foot .status{color:var(--green);}
+
+  /* TOKEN */
+  .token{padding:0 28px 110px;}
+  .token-inner{
+    max-width:640px; margin:0 auto; text-align:center; padding:52px 36px;
+    border:1px solid var(--blue-dim); border-radius:8px;
+    background:radial-gradient(circle at 50% 0%, rgba(47,107,255,0.14), transparent 70%);
+  }
+  .token-badge{
+    display:inline-block; font-family:var(--mono); font-size:12px; letter-spacing:0.1em;
+    color:var(--blue-bright); border:1px solid var(--blue-dim); background:rgba(47,107,255,0.08);
+    padding:6px 14px; border-radius:2px; margin-bottom:20px;
+  }
+  .token-inner h3{font-family:var(--disp); font-size:26px; font-weight:600; margin-bottom:14px;}
+  .token-inner p{color:var(--ink-dim); font-size:14px; line-height:1.7; margin-bottom:30px;}
+  .token-inner p strong{color:var(--ink); font-weight:600;}
+  .token-row{
+    display:flex; justify-content:center; gap:0; margin-bottom:32px;
+    border:1px solid var(--border); border-radius:4px; overflow:hidden;
+  }
+  .token-fact{flex:1; padding:16px 14px; border-right:1px solid var(--border);}
+  .token-fact:last-child{border-right:none;}
+  .tf-label{display:block; font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px;}
+  .tf-value{display:block; font-family:var(--mono); font-size:13px; color:var(--ink);}
+  .tf-value.status-live{color:var(--green);}
+  @media (max-width:560px){ .token-row{flex-direction:column;} .token-fact{border-right:none; border-bottom:1px solid var(--border);} .token-fact:last-child{border-bottom:none;} }
 
   /* PILLARS */
   .pillars{padding:0 28px 110px;}
@@ -249,6 +277,7 @@
     </div>
     <nav class="links">
       <a href="#protocol">Protocol</a>
+      <a href="#token">$BASE20</a>
       <a href="#spec">Spec</a>
       <a href="#docs" aria-disabled="true">Docs · Soon</a>
     </nav>
@@ -265,11 +294,15 @@
     <span><span class="dot blue"></span>STANDARD: BASE-20 INSCRIPTIONS</span>
     <span><span class="dot"></span>MINT MECHANISM: FAIR · NO PRESALE</span>
     <span><span class="dot blue"></span>TEAM ALLOCATION: 0%</span>
+    <span><span class="dot"></span>NATIVE TOKEN: $BASE20</span>
+    <span><span class="dot blue"></span>LAUNCH: LAUNCH.O1.EXCHANGE</span>
     <span><span class="dot"></span>NETWORK: BASE MAINNET</span>
     <span><span class="dot blue"></span>PROTOCOL STATUS: PRE-GENESIS</span>
     <span><span class="dot"></span>STANDARD: BASE-20 INSCRIPTIONS</span>
     <span><span class="dot blue"></span>MINT MECHANISM: FAIR · NO PRESALE</span>
     <span><span class="dot"></span>TEAM ALLOCATION: 0%</span>
+    <span><span class="dot blue"></span>NATIVE TOKEN: $BASE20</span>
+    <span><span class="dot"></span>LAUNCH: LAUNCH.O1.EXCHANGE</span>
   </div>
 </div>
 
@@ -291,6 +324,9 @@
     <div class="cta-row">
       <a class="btn btn-primary" href="https://x.com/basecriptions" target="_blank" rel="noopener">
         Follow @basecriptions ↗
+      </a>
+      <a class="btn btn-outline" href="https://launch.o1.exchange/" target="_blank" rel="noopener">
+        $BASE20 Launches on O1 Exchange ↗
       </a>
       <span class="btn btn-ghost"><span class="lock">🔒</span> Mint — Opens at Genesis</span>
     </div>
@@ -314,10 +350,11 @@
         <span class="punct">{</span><br>
         &nbsp;&nbsp;<span class="k">"p"</span><span class="punct">:</span> <span class="v">"base-20"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"op"</span><span class="punct">:</span> <span class="v">"deploy"</span><span class="punct">,</span><br>
-        &nbsp;&nbsp;<span class="k">"tick"</span><span class="punct">:</span> <span class="v">"????"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"tick"</span><span class="punct">:</span> <span class="v">"BASE20"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"max"</span><span class="punct">:</span> <span class="v">"—"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"lim"</span><span class="punct">:</span> <span class="v">"—"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"chain"</span><span class="punct">:</span> <span class="v">"base"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"launch"</span><span class="punct">:</span> <span class="v">"launch.o1.exchange"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"status"</span><span class="punct">:</span> <span class="v">"awaiting_genesis"</span><span class="cursor"></span><br>
         <span class="punct">}</span>
       </div>
@@ -325,6 +362,29 @@
         <span>block height: <strong>pending</strong></span>
         <span class="status">● listening for genesis</span>
       </div>
+    </div>
+  </section>
+
+  <section class="token" id="token">
+    <div class="token-inner">
+      <div class="token-badge">$BASE20</div>
+      <h3>The native token of the BASE-20 ecosystem.</h3>
+      <p>Every BASE-20 inscription standard needs a native asset to anchor it. <strong>$BASE20</strong> is that token — it launches on <strong>O1 Exchange</strong>, and follows the same fair-first principle as the protocol itself: no presale, no team allocation.</p>
+      <div class="token-row">
+        <div class="token-fact">
+          <span class="tf-label">Token</span>
+          <span class="tf-value">$BASE20</span>
+        </div>
+        <div class="token-fact">
+          <span class="tf-label">Launch venue</span>
+          <span class="tf-value">launch.o1.exchange</span>
+        </div>
+        <div class="token-fact">
+          <span class="tf-label">Status</span>
+          <span class="tf-value status-live">Launching soon</span>
+        </div>
+      </div>
+      <a class="btn btn-primary" href="https://launch.o1.exchange/" target="_blank" rel="noopener">Go to O1 Exchange ↗</a>
     </div>
   </section>
 
@@ -366,6 +426,8 @@
       <div class="spec-table">
         <div class="spec-row"><span class="sk">chain</span><span class="sv">base mainnet</span></div>
         <div class="spec-row"><span class="sk">standard</span><span class="sv">base-20</span></div>
+        <div class="spec-row"><span class="sk">native_token</span><span class="sv">$base20</span></div>
+        <div class="spec-row"><span class="sk">launch_venue</span><span class="sv">launch.o1.exchange</span></div>
         <div class="spec-row"><span class="sk">mint_type</span><span class="sv">fair, first-come</span></div>
         <div class="spec-row"><span class="sk">team_allocation</span><span class="sv">0%</span></div>
         <div class="spec-row"><span class="sk">presale</span><span class="sv">none</span></div>
@@ -397,6 +459,7 @@
     </div>
     <div class="footer-links">
       <a href="https://x.com/basecriptions" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://launch.o1.exchange/" target="_blank" rel="noopener">$BASE20 on O1 Exchange</a>
       <a href="#protocol">Protocol</a>
       <a href="#spec">Spec</a>
     </div>
