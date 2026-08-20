@@ -180,6 +180,44 @@
   }
   .panel-foot .status{color:var(--green);}
 
+  /* MINT */
+  .mint{padding:0 28px 110px;}
+  .mint-panel{
+    max-width:640px; margin:0 auto; padding:40px 36px;
+    border:1px solid var(--border); border-radius:8px;
+    background:linear-gradient(180deg, var(--surface), var(--bg-raise));
+  }
+  .mint-stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:4px;
+    overflow:hidden; margin-bottom:28px;
+  }
+  @media (max-width:560px){ .mint-stats{grid-template-columns:repeat(2,1fr);} }
+  .mint-stat{background:var(--bg-raise); padding:16px 12px; text-align:center;}
+  .ms-label{display:block; font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px;}
+  .ms-value{display:block; font-family:var(--mono); font-size:14px; font-weight:600; color:var(--ink);}
+  .mint-progress{margin-bottom:26px;}
+  .mp-top{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11.5px; color:var(--ink-dim); margin-bottom:8px;}
+  .mp-track{width:100%; height:8px; border-radius:4px; background:var(--bg); border:1px solid var(--border); overflow:hidden;}
+  .mp-fill{height:100%; background:linear-gradient(90deg, var(--blue), var(--blue-bright)); border-radius:4px;}
+  .btn-mint{
+    width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+    font-family:var(--mono); font-size:13.5px; letter-spacing:0.05em; color:var(--ink-dim);
+    padding:16px 20px; border-radius:3px; border:1px solid var(--border); background:var(--bg-raise);
+    cursor:not-allowed;
+  }
+  .btn-mint .lock{opacity:0.7;}
+  .btn-mint span#mint-btn-text{font-variant-numeric:tabular-nums;}
+  .mint-note{
+    margin-top:18px; text-align:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-faint); line-height:1.6;
+  }
+  .mint-note strong{color:var(--blue-bright);}
+  .btn-mint.is-live{
+    cursor:pointer; color:#fff; background:var(--blue); border-color:var(--blue);
+  }
+  .btn-mint.is-live .lock{display:none;}
+
   /* TOKEN */
   .token{padding:0 28px 110px;}
   .token-inner{
@@ -277,6 +315,7 @@
     </div>
     <nav class="links">
       <a href="#protocol">Protocol</a>
+      <a href="#mint">Mint</a>
       <a href="#token">$BASE20</a>
       <a href="#spec">Spec</a>
       <a href="#docs" aria-disabled="true">Docs · Soon</a>
@@ -328,7 +367,7 @@
       <a class="btn btn-outline" href="https://launch.o1.exchange/token/0xb200000000000000000000D622b8C072E5AC1101?chain=8453" target="_blank" rel="noopener">
         $BASE20 Launches on O1 Exchange ↗
       </a>
-      <span class="btn btn-ghost"><span class="lock">🔒</span> Mint — Opens at Genesis</span>
+      <span class="btn btn-ghost" id="hero-mint-cta"><span class="lock">🔒</span> <span id="hero-mint-text">Mint — Opens at Genesis</span></span>
     </div>
 
     <div class="countdown" id="countdown">
@@ -350,9 +389,10 @@
         <span class="punct">{</span><br>
         &nbsp;&nbsp;<span class="k">"p"</span><span class="punct">:</span> <span class="v">"base-20"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"op"</span><span class="punct">:</span> <span class="v">"deploy"</span><span class="punct">,</span><br>
-        &nbsp;&nbsp;<span class="k">"tick"</span><span class="punct">:</span> <span class="v">"BASE20"</span><span class="punct">,</span><br>
-        &nbsp;&nbsp;<span class="k">"max"</span><span class="punct">:</span> <span class="v">"—"</span><span class="punct">,</span><br>
-        &nbsp;&nbsp;<span class="k">"lim"</span><span class="punct">:</span> <span class="v">"—"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"tick"</span><span class="punct">:</span> <span class="v">"BCRT"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"max"</span><span class="punct">:</span> <span class="v">"21,000,000"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"lim"</span><span class="punct">:</span> <span class="v">"100"</span><span class="punct">,</span><br>
+        &nbsp;&nbsp;<span class="k">"cost"</span><span class="punct">:</span> <span class="v">"1,000 $BASE20"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"chain"</span><span class="punct">:</span> <span class="v">"base"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"launch"</span><span class="punct">:</span> <span class="v">"launch.o1.exchange"</span><span class="punct">,</span><br>
         &nbsp;&nbsp;<span class="k">"status"</span><span class="punct">:</span> <span class="v">"awaiting_genesis"</span><span class="cursor"></span><br>
@@ -362,6 +402,49 @@
         <span>block height: <strong>pending</strong></span>
         <span class="status">● listening for genesis</span>
       </div>
+    </div>
+  </section>
+
+  <section class="mint" id="mint">
+    <div class="section-head">
+      <div class="section-eyebrow">Mint $BCRT</div>
+      <div class="section-title">The first token minted on BASE-20.</div>
+    </div>
+
+    <div class="mint-panel">
+      <div class="mint-stats">
+        <div class="mint-stat">
+          <span class="ms-label">Ticker</span>
+          <span class="ms-value">BCRT</span>
+        </div>
+        <div class="mint-stat">
+          <span class="ms-label">Max Supply</span>
+          <span class="ms-value">21,000,000 BCRT</span>
+        </div>
+        <div class="mint-stat">
+          <span class="ms-label">Per Mint</span>
+          <span class="ms-value">100 BCRT</span>
+        </div>
+        <div class="mint-stat">
+          <span class="ms-label">Mint Cost</span>
+          <span class="ms-value">1,000 $BASE20</span>
+        </div>
+      </div>
+
+      <div class="mint-progress">
+        <div class="mp-top">
+          <span>Minted</span>
+          <span>0 / 21,000,000 BCRT</span>
+        </div>
+        <div class="mp-track"><div class="mp-fill" style="width:0%"></div></div>
+      </div>
+
+      <button class="btn-mint" id="mint-btn" disabled>
+        <span class="lock">🔒</span>
+        <span id="mint-btn-text">Mint Opens In —</span>
+      </button>
+
+      <p class="mint-note">210,000 total mints × 1,000 $BASE20 per mint = <strong>210,000,000 $BASE20 burned</strong> once fully minted out.</p>
     </div>
   </section>
 
@@ -426,6 +509,9 @@
       <div class="spec-table">
         <div class="spec-row"><span class="sk">chain</span><span class="sv">base mainnet</span></div>
         <div class="spec-row"><span class="sk">standard</span><span class="sv">base-20</span></div>
+        <div class="spec-row"><span class="sk">first_tick</span><span class="sv">bcrt</span></div>
+        <div class="spec-row"><span class="sk">bcrt_max_supply</span><span class="sv">21,000,000</span></div>
+        <div class="spec-row"><span class="sk">bcrt_per_mint</span><span class="sv">100</span></div>
         <div class="spec-row"><span class="sk">native_token</span><span class="sv">$base20</span></div>
         <div class="spec-row"><span class="sk">launch_venue</span><span class="sv">launch.o1.exchange</span></div>
         <div class="spec-row"><span class="sk">contract</span><span class="sv">0xb200...C1101</span></div>
@@ -487,6 +573,24 @@
     document.getElementById('cd-hours').textContent = pad(h);
     document.getElementById('cd-min').textContent = pad(m);
     document.getElementById('cd-sec').textContent = pad(s);
+
+    var mintBtnText = document.getElementById('mint-btn-text');
+    var mintBtn = document.getElementById('mint-btn');
+    if (mintBtnText && mintBtn) {
+      if (diff <= 0) {
+        mintBtnText.textContent = 'Mint Is Live';
+        mintBtn.classList.add('is-live');
+      } else {
+        mintBtnText.textContent = 'Mint Opens In ' + d + 'd ' + pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+      }
+    }
+
+    var heroMintText = document.getElementById('hero-mint-text');
+    if (heroMintText) {
+      heroMintText.textContent = diff <= 0
+        ? 'Mint Is Live'
+        : 'Mint In ' + d + 'd ' + pad(h) + 'h ' + pad(m) + 'm';
+    }
   }
   tick();
   setInterval(tick, 1000);
